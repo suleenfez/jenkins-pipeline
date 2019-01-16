@@ -6,19 +6,13 @@ def HTTP_PORT="8090"
 node {
 
     stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        def mavenHome  = tool 'myMaven'
+        def dockerHome = tool 'docker'
         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     }
 
     stage('Checkout') {
         checkout scm
     }
-
-    stage('Build'){
-        sh "mvn clean install"
-    }
-
 
     stage("Image Prune"){
         imagePrune(CONTAINER_NAME)
