@@ -4,6 +4,11 @@ def DOCKER_HUB_USER="scetin1337"
 def HTTP_PORT="8090"
 
 node {
+    
+    stage('Initialize'){
+        def dockerHome = tool 'docker'
+        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+    }
 
 
     stage('Checkout') {
